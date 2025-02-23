@@ -214,6 +214,45 @@ paths:
                 $ref: '#/components/schemas/Error'
 
   /user:
+    post:
+      summary: Register a new user
+      description: Registers a new user with a username (required). Requires an access token in the header.
+      operationId: registerUser
+      tags:
+        - User
+      security:
+        - GoogleOAuth: []
+        - AppleOAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+              properties:
+                username:
+                  type: string
+                  example: johndoe
+      responses:
+        '201':
+          description: User successfully registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "123456"
+                  username:
+                    type: string
+                    example: johndoe
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized - Invalid access token
     put:
       summary: Update user profile
       description: Updates user's name and avatar
