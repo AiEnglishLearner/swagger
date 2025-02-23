@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: AiEnglishLearner API
   version: 1.0.0
-  description: API for user authentication and profile management
+  description: API for the backend of ai english learner
   
 servers:
   - url: https://api.example.com/v1
@@ -45,12 +45,12 @@ components:
           description: User's username
         nativeLanguage:
           type: string
-          description: User's native language ( It should be first selected from ip address then user can change )
+          description: User's native language (It should be first selected from ip address then user can change it).
         avatarUrl:
           type: string
           format: uri
-          description: URL to user's avatar image
-        AgeRange:
+          description: URL to user's avatar image.
+        ageRange:
           type: object
           properties:
             min:
@@ -60,16 +60,19 @@ components:
           required:
             - min
             - max
-            description: Age range where age is from min to max, inclusive.
+          description: Age range where age is from min to max, inclusive.
         declaredLevel:
           type: string
           enum: [Beginner, Elementary, Intermediate, Upper-Intermediate, Advanced, Proficient]
+          description: The level which user thinks of itself.
         testedLevel:
           type: string
           enum: [Beginner, Elementary, Intermediate, Upper-Intermediate, Advanced, Proficient]
+          description: The level which we have found out of user from the initial tests.
         target:
           type: string
           enum: [Beginner, Elementary, Intermediate, Upper-Intermediate, Advanced, Proficient]
+          description: The level which user wants to reach.
         motivations: 
           type: array
           items:
@@ -88,7 +91,7 @@ components:
           maxItems: 2
           description: "How does user thinks would learn better and faster."
           example: ["Text", "Music",]
-        TimeRange:
+        timeRange:
           type: object
           properties:
             min:
@@ -98,7 +101,7 @@ components:
           required:
             - min
             - max
-            description: How much time (in minutes) does user want to spend.
+          description: How much time (in minutes) does user want to spend.
       required:
         - id
         - email
@@ -232,9 +235,9 @@ paths:
                   format: binary
                   description: New avatar image file
                 nativeLanguage:
-                  $ref: '#/componets/schemas/AgeRange'
-                AgeRange:
-                  $ref: '#/components/schemas/AgeRange'
+                  $ref: '#/components/schemas/User/properties/nativeLanguage'
+                ageRange:
+                  $ref: '#/components/schemas/User/properties/ageRange'
                 declaredLevel:
                   $ref: '#/components/schemas/User/properties/declaredLevel'
                 testedLevel:
@@ -245,8 +248,8 @@ paths:
                   $ref: '#/components/schemas/User/properties/motivations'
                 learningStyle:
                   $ref: '#/components/schemas/User/properties/learningStyle'
-                TimeRange:
-                  $ref: '#/components/schemas/TimeRange'
+                timeRange:
+                  $ref: '#/components/schemas/User/properties/timeRange'
       responses:
         '200':
           description: Successfully updated user profile
