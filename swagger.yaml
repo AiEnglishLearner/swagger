@@ -135,6 +135,8 @@ paths:
     get:
       summary: Initiate Google OAuth 2.0 Login
       description: Redirects to Google OAuth 2.0 authentication
+      tags:
+        - OAuth 2
       responses:
         '302':
           description: Redirects to Google authorization URL
@@ -143,6 +145,8 @@ paths:
     get:
       summary: Google OAuth 2.0 Callback
       description: Handles Google OAuth 2.0 callback with authorization code
+      tags:
+        - OAuth 2
       parameters:
         - in: query
           name: code
@@ -179,6 +183,8 @@ paths:
     get:
       summary: Initiate Apple OAuth 2.0 Login
       description: Redirects to Apple OAuth 2.0 authentication
+      tags:
+        - OAuth 2
       responses:
         '302':
           description: Redirects to Apple authorization URL
@@ -187,6 +193,8 @@ paths:
     post:
       summary: Apple OAuth 2.0 Callback
       description: Handles Apple OAuth 2.0 callback with authorization code
+      tags:
+        - OAuth 2
       requestBody:
         required: true
         content:
@@ -256,6 +264,8 @@ paths:
     put:
       summary: Update user profile
       description: Updates user's name and avatar
+      tags:
+        - User
       security:
         - GoogleOAuth: []
         - AppleOAuth: []
