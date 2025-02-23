@@ -155,11 +155,24 @@ paths:
               $ref: '#/components/schemas/AuthCallbackRequest'
       responses:
         '200':
-          description: Successful authentication
+          description: Access token response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: ACCESS_TOKEN
+                  token_type:
+                    type: string
+                    example: bearer
+                  expires_in:
+                    type: integer
+                    example: 3600
+                  refresh_token:
+                    type: string
+                    example: REFRESH_TOKEN
         '400':
           description: Invalid request
           content:
@@ -197,11 +210,24 @@ paths:
               $ref: '#/components/schemas/AuthCallbackRequest'
       responses:
         '200':
-          description: Successful authentication
+          description: Access token response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: ACCESS_TOKEN
+                  token_type:
+                    type: string
+                    example: bearer
+                  expires_in:
+                    type: integer
+                    example: 3600
+                  refresh_token:
+                    type: string
+                    example: REFRESH_TOKEN
         '400':
           description: Invalid request
           content:
