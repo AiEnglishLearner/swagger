@@ -43,10 +43,62 @@ components:
         username:
           type: string
           description: User's username
+        nativeLanguage:
+          type: string
+          description: User's native language ( It should be first selected from ip address then user can change )
         avatarUrl:
           type: string
           format: uri
           description: URL to user's avatar image
+        AgeRange:
+          type: object
+          properties:
+            min:
+              type: integer
+            max:
+              type: integer
+          required:
+            - min
+            - max
+            description: Age range where age is from min to max, inclusive.
+        declaredLevel:
+          type: string
+          enum: [Beginner, Elementary, Intermediate, Upper-Intermediate, Advanced, Proficient]
+        testedLevel:
+          type: string
+          enum: [Beginner, Elementary, Intermediate, Upper-Intermediate, Advanced, Proficient]
+        target:
+          type: string
+          enum: [Beginner, Elementary, Intermediate, Upper-Intermediate, Advanced, Proficient]
+        motivations: 
+          type: array
+          items:
+            type: string
+            enum: ["Personal Challenge", "Immigration", "Travel", "Business", "Academy", "Movies"]
+          minItems: 1
+          maxItems: 3
+          description: "Why does user want to learn"
+          example: ["Travel", "Immigration"]
+        learningStyle: 
+          type: array
+          items:
+            type: string
+            enum: ["Text", "Images", "Music", "Movies"]
+          minItems: 1
+          maxItems: 2
+          description: "How does user thinks would learn better and faster."
+          example: ["Text", "Music",]
+        TimeRange:
+          type: object
+          properties:
+            min:
+              type: integer
+            max:
+              type: integer
+          required:
+            - min
+            - max
+            description: How much time (in minutes) does user want to spend.
       required:
         - id
         - email
@@ -179,6 +231,22 @@ paths:
                   type: string
                   format: binary
                   description: New avatar image file
+                nativeLanguage:
+                  $ref: '#/componets/schemas/AgeRange'
+                AgeRange:
+                  $ref: '#/components/schemas/AgeRange'
+                declaredLevel:
+                  $ref: '#/components/schemas/User/properties/declaredLevel'
+                testedLevel:
+                  $ref: '#/components/schemas/User/properties/testedLevel'
+                target:
+                  $ref: '#/components/schemas/User/properties/target'
+                motivations:
+                  $ref: '#/components/schemas/User/properties/motivations'
+                learningStyle:
+                  $ref: '#/components/schemas/User/properties/learningStyle'
+                TimeRange:
+                  $ref: '#/components/schemas/TimeRange'
       responses:
         '200':
           description: Successfully updated user profile
